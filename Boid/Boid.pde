@@ -74,7 +74,7 @@ class Boid
     coh = cohesion(bl);
     sep = seperation(bl);
     acc.add(PVector.mult(ali,1));
-    acc.add(PVector.mult(coh,3));aa
+    acc.add(PVector.mult(coh,3));
     acc.add(PVector.mult(sep,1));
   }
   
