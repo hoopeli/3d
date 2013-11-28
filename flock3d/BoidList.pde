@@ -20,7 +20,7 @@ class BoidList
   
   void add()
   {
-    boids.add(new Boid(new PVector(width/2,height/2,600)));
+    boids.add(new Boid(new PVector(width/2-300,height/2-300,300)));
   }
   
   void addBoid(Boid b)
