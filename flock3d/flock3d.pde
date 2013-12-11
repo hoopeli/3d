@@ -19,6 +19,7 @@ void setup() {
 
   //peasycam
   cam = new PeasyCam(this, 300, 300, 600, 800);
+  cam.setMaximumDistance(4000);
 
   //background image
   bg = loadImage("bg.jpg");
@@ -76,35 +77,60 @@ void keyPressed() {
 //--------------------------------
 
 void drawScene() {
-  //cube  
+  //cube lines  
   stroke(0, 255, 0);
   line(0, 0, 300, 0, height, 300);
   stroke(0, 0, 255);
   line(0, 0, 900, 0, height, 900);
   stroke(255, 0, 0);
   line(0, 0, 300, width, 0, 300);
-  stroke(255, 0, 0);
   line(0, 0, 900, width, 0, 900);
 
   line(width, 0, 300, width, height, 300);
-  stroke(255, 0, 0);
   line(width, 0, 900, width, height, 900);
-  stroke(255, 0, 0);
   line(0, height, 300, width, height, 300);
-  stroke(255, 0, 0);
   line(0, height, 900, width, height, 900);
-  stroke(255, 0, 0);
 
   stroke(0, 0, 255);
   line(0, 0, 300, 0, 0, 900);
   stroke(255, 0, 0);
   line(0, height, 300, 0, height, 900);
-  stroke(255, 0, 0);
   line(width, 0, 300, width, 0, 900);
-  stroke(255, 0, 0);
   line(width, height, 300, width, height, 900);
-  stroke(255, 0, 0);
-
+  
+  //cube sides
+  noStroke();
+  fill(255);
+  beginShape(QUADS);
+  //vertex(0, 0, 300);
+  //vertex(0, height, 300);
+  //vertex(width, height, 300);
+  //vertex(width, 0, 300);
+  
+  vertex(0, 0, 300);
+  vertex(0, height, 300);
+  vertex(0, height, 900);
+  vertex(0, 0, 900);
+  endShape();
+  
+  beginShape(TRIANGLES);
+  vertex(width/2, 0, 300);
+  vertex(0, 0, 300);
+  vertex(0, 0, 600);
+  
+  vertex(0, 0, 600);
+  vertex(0, 0, 900);
+  vertex(width/2, 0, 900);
+  
+  vertex(width/2, 0, 900);
+  vertex(width, 0, 900);
+  vertex(width, 0, 600);
+  
+  vertex(width, 0, 600);
+  vertex(width, 0, 300);
+  vertex(width/2, 0, 300);
+  endShape();
+  
   //other shapes
 }
 
