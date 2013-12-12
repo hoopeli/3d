@@ -1,8 +1,5 @@
-
 import peasy.*;
 PeasyCam cam;
-
-PImage bg;
 
 int initBoidNum = 200; //amount of boids to start the program with
 BoidList flock1; //,flock2,flock3;
@@ -20,9 +17,6 @@ void setup() {
   //peasycam
   cam = new PeasyCam(this, 300, 300, 600, 800);
   cam.setMaximumDistance(4000);
-
-  //background image
-  bg = loadImage("bg.jpg");
 }
 
 void draw() {  
@@ -30,10 +24,15 @@ void draw() {
 
   //lighting
   if (lighting) {
-    directionalLight(255, 0, 0, 0, 1, -100);
-    directionalLight(0, 255, 0, 0, 1, 100);
+    //valon suunta ylös, taakse, vasemmalle
+    // valon sijainti oikealla, alhaalla, lähellä
+    spotLight(200, 102, 126, 500, 400, 800, -1, -1, -1, PI/2, 2);
+    
+    spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
+    
   }
-
+  
+  
   noFill();
   stroke(0);
   drawScene();
@@ -77,60 +76,106 @@ void keyPressed() {
 //--------------------------------
 
 void drawScene() {
-  //cube lines  
-  stroke(0, 255, 0);
-  line(0, 0, 300, 0, height, 300);
-  stroke(0, 0, 255);
-  line(0, 0, 900, 0, height, 900);
-  stroke(255, 0, 0);
-  line(0, 0, 300, width, 0, 300);
-  line(0, 0, 900, width, 0, 900);
 
-  line(width, 0, 300, width, height, 300);
-  line(width, 0, 900, width, height, 900);
-  line(0, height, 300, width, height, 300);
-  line(0, height, 900, width, height, 900);
-
-  stroke(0, 0, 255);
-  line(0, 0, 300, 0, 0, 900);
-  stroke(255, 0, 0);
-  line(0, height, 300, 0, height, 900);
-  line(width, 0, 300, width, 0, 900);
-  line(width, height, 300, width, height, 900);
-  
-  //cube sides
   noStroke();
   fill(255);
   beginShape(QUADS);
-  //vertex(0, 0, 300);
-  //vertex(0, height, 300);
-  //vertex(width, height, 300);
-  //vertex(width, 0, 300);
   
-  vertex(0, 0, 300);
-  vertex(0, height, 300);
-  vertex(0, height, 900);
-  vertex(0, 0, 900);
+  vertex(0, 0, 300); // vasen takakulma
+  vertex(0, 0, 900); // vasen lahikulma
+  vertex(600, 0, 900); // oikea lahikulma
+  vertex(600, 0, 300); //oikea takakulma
   endShape();
   
+  // vasemman sivun kolmiot
   beginShape(TRIANGLES);
-  vertex(width/2, 0, 300);
   vertex(0, 0, 300);
+  vertex(0, 300, 300);
   vertex(0, 0, 600);
+  //takimmainen ylakulma
+  
+  vertex(0, 300, 300); 
+  vertex(0, 600, 300);
+  vertex(0, 600, 600);
+  // takimmainen alakulma
+  
+  vertex(0, 600, 600);
+  vertex(0, 600, 900);
+  vertex(0, 300, 900);
+  // lahella alakulma
   
   vertex(0, 0, 600);
   vertex(0, 0, 900);
-  vertex(width/2, 0, 900);
-  
-  vertex(width/2, 0, 900);
-  vertex(width, 0, 900);
-  vertex(width, 0, 600);
-  
-  vertex(width, 0, 600);
-  vertex(width, 0, 300);
-  vertex(width/2, 0, 300);
+  vertex(0, 300, 900);
+  // lahella ylakulma
   endShape();
   
-  //other shapes
-}
+  // oikean sivun kolmiot
+  beginShape(TRIANGLES);
+  vertex(600, 0, 300);
+  vertex(600, 300, 300);
+  vertex(600, 0, 600);
+  //takimmainen ylakulma
+  
+  vertex(600, 300, 300); 
+  vertex(600, 600, 300);
+  vertex(600, 600, 600);
+  // takimmainen alakulma
+  
+  vertex(600, 600, 600);
+  vertex(600, 600, 900);
+  vertex(600, 300, 900);
+  // lahella alakulma
+  
+  vertex(600, 0, 600);
+  vertex(600, 0, 900);
+  vertex(600, 300, 900);
+  // lahella ylakulma
+  endShape();
+  
+  //langat
+  stroke(100);
+  line(300, 0, 600, 300, 200, 600);
+  line(400, 0, 700, 400, 250, 700);
+  line(200, 0, 500, 200, 300, 500);
 
+
+  //PALLOJA
+  //keskella
+  translate(300, 200, 600);
+  noStroke();
+  sphere(30);
+  translate(-300, -200, -600);
+  
+  //taaempana
+  translate(200, 300, 500);
+  noStroke();
+  sphere(30);
+  translate(-200,-300,-500);
+  
+  translate(400, 250, 700);
+  noStroke();
+  sphere(30);
+  translate(-400,-250,-700);
+ 
+ //--------------------------
+ 
+ //LATTIA
+ // kai tän vois loopillakin tehdä
+ stroke(100);
+ line(0, 600, 300, 600, 600, 300);
+ line(0, 600, 350, 600, 600, 350);
+ line(0, 600, 400, 600, 600, 400);
+ line(0, 600, 450, 600, 600, 450);
+ line(0, 600, 500, 600, 600, 500);
+ line(0, 600, 550, 600, 600, 550);
+ line(0, 600, 600, 600, 600, 600);
+ line(0, 600, 650, 600, 600, 650);
+ line(0, 600, 700, 600, 600, 700);
+ line(0, 600, 750, 600, 600, 750);
+ line(0, 600, 800, 600, 600, 800);
+ line(0, 600, 850, 600, 600, 850);
+ line(0, 600, 900, 600, 600, 900);
+ 
+ 
+}
