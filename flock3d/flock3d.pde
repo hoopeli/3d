@@ -1,3 +1,4 @@
+
 import peasy.*;
 PeasyCam cam;
 PImage img;
@@ -88,10 +89,10 @@ void keyPressed() {
   case 'd': 
     lighting = !lighting; 
     break;
-  case '=': 
+  case 'q': 
     flock1.add(); 
     break;
-  case '-': 
+  case 'w': 
     flock1.remove(); 
     break;
   }
