@@ -35,9 +35,11 @@ void draw() {
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
     //valo joulupalloista
+    /**
     pointLight(240, 52, 50, 300, 200, 600);
     pointLight(200, 52, 150, 200, 300, 500);
     pointLight(150, 52, 50, 400, 250, 700);
+    */
   }
   
   
@@ -46,20 +48,20 @@ void draw() {
   drawScene();
   
   //65 on puolet korkeudesta 130
-  drawCylinder(10, 20, 130, width/2, width-65, 400);
-  drawKupu(60.0, 2*PI/20, width/2, width-95, 400);
+  drawCylinder(10, 20, 150, width/2, width-75, 400);
+  drawKupu(60.0, 2*PI/20, width/2, width-105, 400);
  
-  drawCylinder(10, 30, 70, 430, width-35, 500);
-  drawKupu(55.0, 2*PI/20, 430, width-65, 500);
+  drawCylinder(10, 30, 90, 430, width-45, 500);
+  drawKupu(55.0, 2*PI/20, 430, width-75, 500);
   
-  drawCylinder(10, 10, 60, 500, width-30, 800);
-  drawKupu(32.0, 2*PI/20, 500, width-60, 800);
+  drawCylinder(10, 10, 80, 500, width-40, 800);
+  drawKupu(32.0, 2*PI/20, 500, width-70, 800);
   
-  drawCylinder(10, 15, 60, 100, width-30, 350);
-  drawKupu(25.0, 2*PI/20, 100, width-60, 350);
+  drawCylinder(10, 15, 80, 100, width-40, 350);
+  drawKupu(25.0, 2*PI/20, 100, width-70, 350);
   
-  drawCylinder(10, 15, 150, 100, width-75, 770);
-  drawKupu(40.0, 2*PI/20, 100, width-130, 770);
+  drawCylinder(10, 15, 170, 100, width-85, 770);
+  drawKupu(40.0, 2*PI/20, 100, width-140, 770);
   
   flock1.run(avoidWalls);
   //flock2.run(avoidWalls);
@@ -102,7 +104,7 @@ void keyPressed() {
 
 void drawScene() {
 
-  //katto
+  // KATTO
   noStroke();
   fill(255);
   beginShape(QUADS);
@@ -135,30 +137,54 @@ void drawScene() {
   // lahella ylakulma
   endShape();
   
-  // oikean sivun kolmiot
-  beginShape(TRIANGLES);
-  vertex(600, 0, 300);
-  vertex(600, 300, 300);
-  vertex(600, 0, 600);
-  //takimmainen ylakulma
-  
-  vertex(600, 300, 300); 
-  vertex(600, 600, 300);
-  vertex(600, 600, 600);
-  // takimmainen alakulma
-  
-  vertex(600, 600, 600);
-  vertex(600, 600, 900);
-  vertex(600, 300, 900);
-  // lahella alakulma
-  
-  vertex(600, 0, 600);
+ // OIKEAN SIVUN SYDANIKKUNA
+  beginShape();
+  vertex(600, 0, 750);
+  curveVertex(600, 0, 750);
+  curveVertex(600, 60, 865);
+  curveVertex(600, 200, 900);
+  curveVertex(600, 200, 900);
   vertex(600, 0, 900);
-  vertex(600, 300, 900);
-  // lahella ylakulma
+  
+  vertex(600, 0, 750);
+  curveVertex(600, 0, 750);
+  curveVertex(600, 20, 670);
+  curveVertex(600, 140, 600);
+  curveVertex(600, 140, 600);
+  vertex(600, 0, 600);
   endShape();
   
-  //langat
+  beginShape();
+  vertex(600, 600, 600);
+  vertex(600, 600, 900);
+  vertex(600, 200, 900);
+  endShape();
+  
+  beginShape();
+  vertex(600, 200, 300);
+  curveVertex(600, 200, 300);
+  curveVertex(600, 60, 335);
+  curveVertex(600, 0, 450);
+  curveVertex(600, 0, 450);
+  vertex(600, 0, 300);
+  endShape();
+  
+  beginShape();
+  vertex(600, 0, 450);
+  curveVertex(600, 0, 450);
+  curveVertex(600, 20, 530);
+  curveVertex(600, 140, 600);
+  curveVertex(600, 140, 600);
+  vertex(600, 0, 600);
+  endShape();
+   
+  beginShape();
+  vertex(600, 600, 600);
+  vertex(600, 600, 300);
+  vertex(600, 200, 300);
+  endShape();
+  
+  //LANGAT
   stroke(100);
   line(300, 0, 600, 300, 200, 600);
   line(400, 0, 700, 400, 250, 700);
@@ -186,21 +212,26 @@ void drawScene() {
  
  //--------------------------
  
- //LATTIA
- stroke(100);
- line(0, 600, 300, 600, 600, 300);
- line(0, 600, 350, 600, 600, 350);
- line(0, 600, 400, 600, 600, 400);
- line(0, 600, 450, 600, 600, 450);
- line(0, 600, 500, 600, 600, 500);
- line(0, 600, 550, 600, 600, 550);
- line(0, 600, 600, 600, 600, 600);
- line(0, 600, 650, 600, 600, 650);
- line(0, 600, 700, 600, 600, 700);
- line(0, 600, 750, 600, 600, 750);
- line(0, 600, 800, 600, 600, 800);
- line(0, 600, 850, 600, 600, 850);
- line(0, 600, 900, 600, 600, 900);
+ 
+ //RUOHIKKO
+ // jos hidastelee liikaa, muuttakaa tuo
+ // kierroksittainen lisäys suuremmaksi numeroksi
+ // esim. 20 --> 40
+ // ja samalla 11 --> 21
+ for(int x = 1; x < 600; x += 20) {
+    for(int z = 300; z < 899; z += 20) {
+      stroke(50, 240, 20);
+      line(x, 600, z, x, 555, z);
+    }
+  }
+  
+  for(int x = 11; x < 600; x += 20) {
+    for(int z = 310; z < 899; z += 20) {
+      stroke(50, 240, 20);
+      line(x, 600, z, x, 555, z);
+    }
+  }
+ 
  
  //------------------------------
  
@@ -270,7 +301,8 @@ void drawScene() {
  
  //------------------------------
  
- image(img, 100, 100, 1067, 549);
+ //KISSA
+ image(img, -200, 80, 1067, 549);
 }
 
 void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
