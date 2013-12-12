@@ -34,11 +34,9 @@ void draw() {
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
     //valo joulupalloista
-    /**
     pointLight(240, 52, 50, 300, 200, 600);
     pointLight(200, 52, 150, 200, 300, 500);
     pointLight(150, 52, 50, 400, 250, 700);
-    */
   }
   
   

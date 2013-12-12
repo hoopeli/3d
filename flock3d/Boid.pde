@@ -14,12 +14,13 @@ class Boid
   //fields
   PVector pos,vel,acc,ali,coh,sep; //pos, velocity, and acceleration in a vector datatype
   float neighborhoodRadius; //radius in which it looks for fellow boids
-  float maxSpeed = 4; //maximum magnitude for the velocity vector
+  float maxSpeed = 3; //maximum magnitude for the velocity vector
   float maxSteerForce = .1; //maximum magnitude of the steering vector
   float h; //hue
   float sc=3; //scale factor for the render of the boid
   float flap = 0;
   float t=0;
+  int kuvio = 0;
   boolean avoidWalls = false;
   
   //constructors
@@ -30,6 +31,9 @@ class Boid
     vel = new PVector(random(-1,1),random(-1,1),random(1,-1));
     acc = new PVector(0,0,0);
     neighborhoodRadius = 100;
+    
+    // arvotaan kortin kuvio
+    kuvio = int(random(4));
   }
   Boid(PVector inPos,PVector inVel,float r)
   {
@@ -39,12 +43,15 @@ class Boid
     vel.set(inVel);
     acc = new PVector(0,0);
     neighborhoodRadius = r;
+    
+    // arvotaan kortin kuvio
+    kuvio = int(random(4));
   }
   
   void run(ArrayList bl)
   {
     t+=.1;
-    flap = 10*sin(t);
+    flap = 3*sin(t);
     
     //acc.add(new PVector(0,.05,0));
     //acc.add(PVector.mult(avoid(new PVector(mouseX,mouseY,pos.z),true),50));
@@ -113,34 +120,85 @@ class Boid
     noFill();
     noStroke();
     fill(h);
-    //draw bird
+    
+    //kortin piirto
+    beginShape(QUADS);
+    vertex(0,0,-2*sc);
+    vertex(-3*sc,0,-2*sc);
+    vertex(-3*sc,0,2*sc);
+    vertex(0,0,2*sc);
+    endShape();
+    
     beginShape(TRIANGLES);
+    vertex(0,0,0);
+    vertex(0,0,-2*sc);
     vertex(3*sc,0,0);
-    vertex(-3*sc,2*sc,0);
-    vertex(-3*sc,-2*sc,0);
     
+    vertex(0,0,0);
+    vertex(0,0,2*sc);
     vertex(3*sc,0,0);
-    vertex(-3*sc,2*sc,0);
-    vertex(-3*sc,0,2*sc);
-    
-    vertex(3*sc,0,0);
-    vertex(-3*sc,0,2*sc);
-    vertex(-3*sc,-2*sc,0);
     
     // wings
-    vertex(2*sc,0,0);
-    vertex(-1*sc,0,0);
-    vertex(-1*sc,-8*sc,flap);
+    vertex(3*sc,flap,-2*sc);
+    vertex(0,0,-2*sc);
+    vertex(3*sc,0,0);
     
-    vertex(2*sc,0,0);
-    vertex(-1*sc,0,0);
-    vertex(-1*sc,8*sc,flap);
+    vertex(3*sc,flap,2*sc);
+    vertex(0,0,2*sc);
+    vertex(3*sc,0,0);
     
-    
-    vertex(-3*sc,0,2*sc);
-    vertex(-3*sc,2*sc,0);
-    vertex(-3*sc,-2*sc,0);
     endShape();
+    
+    //tausta
+    
+    //kuviot
+    fill(255,0,0);
+    
+    //ruutu
+    if (kuvio == 0) {
+      beginShape(QUADS);
+      vertex(-1.5*sc,0.001,0);
+      vertex(0,0.001,-1*sc);
+      vertex(1.5*sc,0.001,0);
+      vertex(0,0.001,1*sc);
+      endShape();
+    }
+    
+    //hertta
+    if (kuvio == 1) {
+      beginShape(TRIANGLES);
+      vertex(0.5*sc,0.001,-1*sc);
+      vertex(0.5*sc,0.001,1*sc);
+      vertex(-1.5*sc,0.001,0);
+      endShape();
+      
+      beginShape();
+      curveVertex(-3*sc,0.001,0*sc);
+      curveVertex(0.5*sc,0.001,-1*sc);
+      //curveVertex(1*sc,0.001,-0.5*sc);
+      curveVertex(0.5*sc,0.001,0);
+      curveVertex(-3*sc,0.001,-1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(-3*sc,0.001,1*sc);
+      curveVertex(0.5*sc,0.001,0);
+      //curveVertex(1*sc,0.001,-0.5*sc);
+      curveVertex(0.5*sc,0.001,1*sc);
+      curveVertex(-3*sc,0.001,0*sc);
+      endShape();
+    }
+    
+    fill(0);
+    
+    //risti
+    if (kuvio == 2) {
+    }
+    
+    //pata
+    if (kuvio == 3) {
+    }
+    
     //box(10);
     popMatrix();
   }
