@@ -15,6 +15,8 @@ int kor4 = 80;
 int kor5 = 170;
 int startTime;
 
+PFont font;
+
 void setup() {
   size(600, 600, P3D);
 
@@ -28,6 +30,8 @@ void setup() {
   cam.setMaximumDistance(4000);
   
   img = loadImage("katti2.jpg");
+  
+  font = loadFont("Aparajita-48.vlw");
   
   startTime = millis();
 }
@@ -53,7 +57,8 @@ void draw() {
   
   noFill();
   stroke(0);
-  drawScene();
+  drawScene();        
+  drawInstructions(); //Title and instructions
   
  
   drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
@@ -392,4 +397,24 @@ void mousePressed() {
       }
     }
   }
+}
+void drawInstructions(){
+  fill(0, 355); //Fade in from black
+  rect(0, 0, width, height);
+  fill(255, 155);
+  pushMatrix();
+  translate(width/2, height/2-100);
+  textFont(font);
+  textSize(120);
+  text("The Creator", 0, 0);
+  textSize(40);
+  text("Mouse", 0, 100);
+  textSize(40);
+  text("Left - destroy or breed...", 0, 150);
+  text("Right - move sun...", 0, 200);
+  text("Center - no barriers...", 0, 250);
+  textSize(30);
+  text("Hold down right - camera rotation", 0, 300);
+  text("Double click - center camera", 0, 350);
+  popMatrix();
 }
