@@ -46,11 +46,9 @@ void draw() {
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
     //valo joulupalloista
-    
-    //pointLight(240, 52, 50, 300, 200, 600);
-   // pointLight(200, 52, 150, 200, 300, 500);
+    pointLight(240, 52, 50, 300, 200, 600);
+    pointLight(200, 52, 150, 200, 300, 500);
     pointLight(120, 52, 100, 400, 250, 700);
-    
   }
   
   
@@ -319,7 +317,10 @@ void drawScene() {
  //------------------------------
  
  //KISSA
- image(img, -200, 80, 1067, 549);
+ pushMatrix();
+ translate(-400, -250, -900);
+ image(img, -200, 80, 1814, 933);
+ popMatrix();
 }
 
 void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
