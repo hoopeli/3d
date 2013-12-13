@@ -14,10 +14,10 @@ class Boid
   //fields
   PVector pos,vel,acc,ali,coh,sep; //pos, velocity, and acceleration in a vector datatype
   float neighborhoodRadius; //radius in which it looks for fellow boids
-  float maxSpeed = 3; //maximum magnitude for the velocity vector
+  float maxSpeed = 4; //maximum magnitude for the velocity vector
   float maxSteerForce = .1; //maximum magnitude of the steering vector
   float h; //hue
-  float sc=3; //scale factor for the render of the boid
+  float sc=9; //scale factor for the render of the boid
   float flap = 0;
   float t=0;
   int kuvio = 0;
@@ -157,35 +157,33 @@ class Boid
     //ruutu
     if (kuvio == 0) {
       beginShape(QUADS);
-      vertex(-1.5*sc,0.001,0);
-      vertex(0,0.001,-1*sc);
-      vertex(1.5*sc,0.001,0);
-      vertex(0,0.001,1*sc);
+      vertex(-1.5*sc,0.01,0);
+      vertex(0,0.01,-1*sc);
+      vertex(1.5*sc,0.01,0);
+      vertex(0,0.01,1*sc);
       endShape();
     }
     
     //hertta
     if (kuvio == 1) {
       beginShape(TRIANGLES);
-      vertex(0.5*sc,0.001,-1*sc);
-      vertex(0.5*sc,0.001,1*sc);
-      vertex(-1.5*sc,0.001,0);
+      vertex(0.5*sc,0.01,-1*sc);
+      vertex(0.5*sc,0.01,1*sc);
+      vertex(-1.5*sc,0.01,0);
       endShape();
       
       beginShape();
-      curveVertex(-3*sc,0.001,0*sc);
-      curveVertex(0.5*sc,0.001,-1*sc);
-      //curveVertex(1*sc,0.001,-0.5*sc);
-      curveVertex(0.5*sc,0.001,0);
-      curveVertex(-3*sc,0.001,-1*sc);
+      curveVertex(-3*sc,0.01,0*sc);
+      curveVertex(0.5*sc,0.01,-1*sc);
+      curveVertex(0.5*sc,0.01,0);
+      curveVertex(-3*sc,0.01,-1*sc);
       endShape();
       
       beginShape();
-      curveVertex(-3*sc,0.001,1*sc);
-      curveVertex(0.5*sc,0.001,0);
-      //curveVertex(1*sc,0.001,-0.5*sc);
-      curveVertex(0.5*sc,0.001,1*sc);
-      curveVertex(-3*sc,0.001,0*sc);
+      curveVertex(-3*sc,0.01,1*sc);
+      curveVertex(0.5*sc,0.01,0);
+      curveVertex(0.5*sc,0.01,1*sc);
+      curveVertex(-3*sc,0.01,0*sc);
       endShape();
     }
     
@@ -193,10 +191,87 @@ class Boid
     
     //risti
     if (kuvio == 2) {
+      beginShape(TRIANGLES);
+      vertex(-0.5*sc,0.01,0);
+      vertex(-1.5*sc,0.01,-0.3*sc);
+      vertex(-1.5*sc,0.01,0.3*sc);
+      
+      vertex(-0.5*sc,0.01,-1*sc);
+      vertex(1.5*sc,0.01,0);
+      vertex(-0.5*sc,0.01,1*sc);
+      endShape();
+      
+      //vasen sakara
+      beginShape();
+      curveVertex(3*sc,0.01,0);
+      curveVertex(-0.5*sc,0.01,0);
+      curveVertex(-0.5*sc,0.01,-1*sc);
+      curveVertex(3*sc,0.01,-1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(-2*sc,0.01,1*sc);
+      curveVertex(-0.5*sc,0.01,-1*sc);
+      curveVertex(0.5*sc,0.01,-0.5*sc);
+      curveVertex(-0.5*sc,0.01,1*sc);
+      endShape();
+      
+      //keskisakara
+      beginShape();
+      curveVertex(-0.5*sc,0.01,1*sc);
+      curveVertex(0.5*sc,0.01,-0.5*sc);
+      curveVertex(1.5*sc,0.01,0);
+      curveVertex(0.5*sc,0.01,1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(0.5*sc,0.01,-1*sc);
+      curveVertex(1.5*sc,0.01,0);
+      curveVertex(0.5*sc,0.01,0.5*sc);
+      curveVertex(-0.5*sc,0.01,-1*sc);
+      endShape();
+      
+      //oikea sakara
+      beginShape();
+      curveVertex(-0.5*sc,0.01,-1*sc);
+      curveVertex(0.5*sc,0.01,0.5*sc);
+      curveVertex(-0.5*sc,0.01,1*sc);
+      curveVertex(-2*sc,0.01,-1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(3*sc,0.01,1*sc);
+      curveVertex(-0.5*sc,0.01,1*sc);
+      curveVertex(-0.5*sc,0.01,0);
+      curveVertex(3*sc,0.01,0);
+      endShape();
     }
     
     //pata
     if (kuvio == 3) {
+      beginShape(TRIANGLES);
+      vertex(-0.5*sc,0.01,0);
+      vertex(-1.5*sc,0.01,-0.3*sc);
+      vertex(-1.5*sc,0.01,0.3*sc);
+      
+      vertex(-0.5*sc,0.01,-1*sc);
+      vertex(1.5*sc,0.01,0);
+      vertex(-0.5*sc,0.01,1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(3*sc,0.01,0);
+      curveVertex(-0.5*sc,0.01,0);
+      curveVertex(-0.5*sc,0.01,-1*sc);
+      curveVertex(3*sc,0.01,-1*sc);
+      endShape();
+      
+      beginShape();
+      curveVertex(3*sc,0.01,1*sc);
+      curveVertex(-0.5*sc,0.01,1*sc);
+      curveVertex(-0.5*sc,0.01,0);
+      curveVertex(3*sc,0.01,0);
+      endShape();
     }
     
     //box(10);
