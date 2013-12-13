@@ -116,12 +116,13 @@ void draw() {
 //handle keys
 void keyPressed() {
   switch (key) {
-  case 'a': drawHat
+  case 'a':
     avoidWalls = !avoidWalls; 
     break;
-  case 's': 
+  /*case 's': 
     lighting = !lighting; 
     break;
+  */
   case 'q': 
     flock1.add(); 
     break;
