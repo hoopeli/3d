@@ -400,10 +400,14 @@ void mousePressed() {
 }
 void drawInstructions(){
   //fill(255,255,255); //Fade in from black
-  rect(0, 0, width, height);
-  fill(255, 255, 255);
+  //rect(0, 0, width, height);
+  //fill(255, 255, 255);
+  cam.beginHUD();
   pushMatrix();
-  translate(100, 100, 1000);
+  translate(10, 100);
+  fill(255,255,255);
+  //rect(100,100,600,600);
+  
   textFont(font);
   textSize(60);
   text("Liisa ihmemaassa", 0, 0);
@@ -425,4 +429,5 @@ void drawInstructions(){
   text("A - Aktivoi törmäystarkastelu...", 0, 190);
   fill(0);
   popMatrix();
+  cam.endHUD();
 }
