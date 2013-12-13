@@ -82,19 +82,19 @@ void draw() {
   
   //Sienet
   drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
-  drawKupu(60.0, 2*PI/20, width/2, width-kor1, 400);
+  drawHat(60.0, 2*PI/20, width/2, width-kor1, 400);
 
   drawCylinder(10, 30, kor2, 430, width-(kor2/2), 500);
-  drawKupu(55.0, 2*PI/20, 430, width-kor2, 500);
+  drawHat(55.0, 2*PI/20, 430, width-kor2, 500);
 
   drawCylinder(10, 10, kor3, 500, width-(kor3/2), 800);
-  drawKupu(32.0, 2*PI/20, 500, width-kor3, 800);
+  drawHat(32.0, 2*PI/20, 500, width-kor3, 800);
 
   drawCylinder(10, 15, kor4, 100, width-(kor4/2), 350);
-  drawKupu(25.0, 2*PI/20, 100, width-kor4, 350);
+  drawHat(25.0, 2*PI/20, 100, width-kor4, 350);
 
   drawCylinder(10, 15, kor5, 100, width-(kor5/2), 770);
-  drawKupu(40.0, 2*PI/20, 100, width-kor5, 770);
+  drawHat(40.0, 2*PI/20, 100, width-kor5, 770);
 
   flock1.run(avoidWalls);
   //flock2.run(avoidWalls);
@@ -116,7 +116,7 @@ void draw() {
 //handle keys
 void keyPressed() {
   switch (key) {
-  case 'a': 
+  case 'a': drawHat
     avoidWalls = !avoidWalls; 
     break;
   case 's': 

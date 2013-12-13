@@ -190,8 +190,6 @@ void drawScene() {
   vertex(400, 1, 300);
   endShape();
 
-  //------------------------------
-
   //KISSA
   pushMatrix();
   translate(-400, -250, -900);
@@ -199,8 +197,7 @@ void drawScene() {
   popMatrix();
 }
 
-void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
-{
+void drawCylinder(int sides, float r, float h, int x1, int y1, int z1){
   float angle = 360 / sides;
   float halfHeight = h / 2;
 
@@ -237,7 +234,7 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
 }
 
 
-void drawKupu(float r, float f, int x1, int y1, int z1) {
+void drawHat(float r, float f, int x1, int y1, int z1) {
   noStroke();
   fill(200, 30, 49);
 
@@ -268,9 +265,9 @@ void drawKupu(float r, float f, int x1, int y1, int z1) {
   translate(-x1, -y1, -z1);
 }
 
+//Alkunäytön ohjeiden piirto
 void drawInstructions() {
-  //fill(255,255,255); //Fade in from black
-
+  //beginHUD mahdollistaa kameran asennosta riippumatta näkyvän aloitustekstin
   cam.beginHUD();
   pushMatrix();
   fill(0);
