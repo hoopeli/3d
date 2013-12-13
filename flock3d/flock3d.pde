@@ -1,4 +1,6 @@
 import peasy.*;
+import ddf.minim.*;
+
 PeasyCam cam;
 PImage img;
 PVector[] sphereVertexPoints;
@@ -16,6 +18,10 @@ int startTime;
 
 PFont font;
 
+//music
+Minim minim;
+AudioPlayer aplayer;
+
 void setup() {
   size(600, 600, P3D);
 
@@ -29,8 +35,14 @@ void setup() {
   cam.setMaximumDistance(4000);
   
   img = loadImage("katti2.jpg");
-  
   font = loadFont("Aparajita-48.vlw");
+  
+  //music
+  minim = new Minim(this);
+  aplayer = minim.loadFile("Waltzinblack.mp3"); //The Stranglers - Waltzinblack
+  aplayer.play(); // play music
+  aplayer.loop(); // loop song
+  //aplayer.setGain(50); // more volume
   
   startTime = millis();
 }
