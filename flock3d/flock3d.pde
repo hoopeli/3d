@@ -52,12 +52,12 @@ void draw() {
 
   //lighting
   if (lighting) {
-    //valon suunta ylös, taakse, vasemmalle
+    // valon suunta ylös, taakse, vasemmalle
     // valon sijainti oikealla, alhaalla, lähellä
     spotLight(200, 102, 166, 500, 400, 800, -1, -1, -1, PI/2, 2);
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
-    //valo joulupalloista
+    // joulupallojen valoja
     pointLight(240, 52, 50, 300, 200, 600);
     pointLight(200, 52, 150, 200, 300, 500);
     pointLight(120, 52, 100, 400, 250, 700);
@@ -67,6 +67,8 @@ void draw() {
   noFill();
   stroke(0);
   drawScene();
+  
+  // piirtää sienet
   if(startTime < 10000){
   lighting = false;  
   drawInstructions(); //Title and instructions
@@ -124,6 +126,22 @@ void keyPressed() {
   case 'w': 
     flock1.remove(); 
     break;
+  case 'e':
+    for (int i = 10; i < 20; i++) {
+    if (millis() > startTime + 10){
+      if (kor2 < 500) {
+      startTime = millis();
+      // lisäys sienien korkeuksiin
+      kor1 = kor1 + i;
+      kor2 = kor2 + 2*i;
+      kor3 = kor3 + 2*i;
+      kor4 = kor4 + 2*i;
+      kor5 = kor5 + i;
+      }
+    }
+  }
+  break;
+
   }
 }
 
@@ -219,14 +237,11 @@ void drawScene() {
 
 
   //PALLOJA
-  //keskella
   translate(300, 200, 600);
   noStroke();
-  //stroke(240, 52, 50);
   sphere(30);
   translate(-300, -200, -600);
   
-  //taaempana
   translate(200, 300, 500);
   noStroke();
   sphere(30);
@@ -241,10 +256,7 @@ void drawScene() {
  
  
  //RUOHIKKO
- // jos hidastelee liikaa, muuttakaa tuo
- // kierroksittainen lisäys suuremmaksi numeroksi
- // esim. 20 --> 40
- // ja samalla 11 --> 21
+ // ruohikon tekeminen jaettu kahteen vuorottelevaan riviin
  for(int x = 1; x < 600; x += 20) {
     for(int z = 300; z < 899; z += 20) {
       stroke(80, 210, 20);
@@ -263,6 +275,7 @@ void drawScene() {
  //------------------------------
  
  // KATON RUUTUKUVIO
+ // kolmiot
  beginShape(TRIANGLES);
  fill(200, 100, 100);
  noStroke();
@@ -291,7 +304,7 @@ void drawScene() {
  vertex(500, 1, 400);
  endShape();
  
- 
+ // neliöt
  beginShape(QUADS);
  fill(200,100,100);
  noStroke();
@@ -339,9 +352,10 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
 {
     float angle = 360 / sides;
     float halfHeight = h / 2;
-    // kansi
+    
     translate(x1, y1, z1);
     
+    // kansi, monikulmio
     beginShape();
     for (int i = 0; i < sides; i++) {
         float x = cos( radians( i * angle ) ) * r;
@@ -349,7 +363,8 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
         vertex( x, -halfHeight, y );    
     }
     endShape(CLOSE);
-    // pohja
+    
+    // pohja, monikulmio
     beginShape();
     for (int i = 0; i < sides; i++) {
         float x = cos( radians( i * angle ) ) * r;
@@ -358,7 +373,7 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
     }
     endShape(CLOSE);
     
-    //piirretaan lopuksi sivut
+    //pohjan ja kannen välillä olevat tahkot
 beginShape(TRIANGLE_STRIP);
 for (int i = 0; i < sides + 1; i++) {
     float x = cos( radians( i * angle ) ) * r;
@@ -372,7 +387,6 @@ translate(-x1, -y1, -z1);
 
 
 void drawKupu(float r, float f, int x1, int y1, int z1) {
-
   noStroke();
   fill(200, 30, 49);
   
@@ -380,6 +394,8 @@ void drawKupu(float r, float f, int x1, int y1, int z1) {
   float x, y, z;
   
   translate(x1, y1, z1);
+  
+  // puolipallon piirtäminen kartionsiivu kerrallaan
   for(float phi = 0.0; phi < HALF_PI; phi += f) {
     beginShape(QUAD_STRIP);
     for(float theta = 0.0; theta < TWO_PI + f; theta += f) {
@@ -415,6 +431,7 @@ void mousePressed() {
     }
   }
 }
+
 void drawInstructions(){
   //fill(255,255,255); //Fade in from black
   
