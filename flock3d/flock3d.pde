@@ -1,6 +1,5 @@
-import peasy.*;
-import ddf.minim.*;
 
+import peasy.*;
 PeasyCam cam;
 PImage img;
 PVector[] sphereVertexPoints;
@@ -16,12 +15,6 @@ int kor4 = 80;
 int kor5 = 170;
 int startTime;
 
-PFont font;
-
-//music
-Minim minim;
-AudioPlayer aplayer;
-
 void setup() {
   size(600, 600, P3D);
 
@@ -35,14 +28,6 @@ void setup() {
   cam.setMaximumDistance(4000);
   
   img = loadImage("katti2.jpg");
-  font = loadFont("Aparajita-48.vlw");
-  
-  //music
-  minim = new Minim(this);
-  aplayer = minim.loadFile("Waltzinblack.mp3"); //The Stranglers - Waltzinblack
-  aplayer.play(); // play music
-  aplayer.loop(); // loop song
-  //aplayer.setGain(50); // more volume
   
   startTime = millis();
 }
@@ -52,29 +37,25 @@ void draw() {
 
   //lighting
   if (lighting) {
-    //valon suunta ylös, taakse, vasemmalle
+    // valon suunta ylös, taakse, vasemmalle
     // valon sijainti oikealla, alhaalla, lähellä
     spotLight(200, 102, 166, 500, 400, 800, -1, -1, -1, PI/2, 2);
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
-    //valo joulupalloista
-    pointLight(240, 52, 50, 300, 200, 600);
-    pointLight(200, 52, 150, 200, 300, 500);
+    
+    // joulupallojen valoja
+    //pointLight(240, 52, 50, 300, 200, 600);
+   // pointLight(200, 52, 150, 200, 300, 500);
     pointLight(120, 52, 100, 400, 250, 700);
+    
   }
   
   
   noFill();
   stroke(0);
   drawScene();
-  if(startTime < 10000){
-  lighting = false;  
-  drawInstructions(); //Title and instructions
-  }
-  if(startTime > 10000){
-  lighting = true; 
-  }
- 
+  
+  // piirtää sienet
   drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
   drawKupu(60.0, 2*PI/20, width/2, width-kor1, 400);
  
@@ -124,6 +105,21 @@ void keyPressed() {
   case 'w': 
     flock1.remove(); 
     break;
+  case 'e':
+    for (int i = 10; i < 20; i++) {
+    if (millis() > startTime + 10){
+      if (kor2 < 500) {
+      startTime = millis();
+      // lisäys sienien korkeuksiin
+      kor1 = kor1 + i;
+      kor2 = kor2 + 2*i;
+      kor3 = kor3 + 2*i;
+      kor4 = kor4 + 2*i;
+      kor5 = kor5 + i;
+      }
+    }
+  }
+  break;
   }
 }
 
@@ -219,14 +215,11 @@ void drawScene() {
 
 
   //PALLOJA
-  //keskella
   translate(300, 200, 600);
   noStroke();
-  //stroke(240, 52, 50);
   sphere(30);
   translate(-300, -200, -600);
   
-  //taaempana
   translate(200, 300, 500);
   noStroke();
   sphere(30);
@@ -241,10 +234,7 @@ void drawScene() {
  
  
  //RUOHIKKO
- // jos hidastelee liikaa, muuttakaa tuo
- // kierroksittainen lisäys suuremmaksi numeroksi
- // esim. 20 --> 40
- // ja samalla 11 --> 21
+ // ruohikon tekeminen jaettu kahteen vuorottelevaan riviin
  for(int x = 1; x < 600; x += 20) {
     for(int z = 300; z < 899; z += 20) {
       stroke(80, 210, 20);
@@ -263,6 +253,7 @@ void drawScene() {
  //------------------------------
  
  // KATON RUUTUKUVIO
+ // kolmiot
  beginShape(TRIANGLES);
  fill(200, 100, 100);
  noStroke();
@@ -291,7 +282,7 @@ void drawScene() {
  vertex(500, 1, 400);
  endShape();
  
- 
+ // neliöt
  beginShape(QUADS);
  fill(200,100,100);
  noStroke();
@@ -329,19 +320,17 @@ void drawScene() {
  //------------------------------
  
  //KISSA
- pushMatrix();
- translate(-400, -250, -900);
- image(img, -200, 80, 1814, 933);
- popMatrix();
+ image(img, -200, 80, 1067, 549);
 }
 
 void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
 {
     float angle = 360 / sides;
     float halfHeight = h / 2;
-    // kansi
+   
     translate(x1, y1, z1);
     
+    // kansi, monikulmio
     beginShape();
     for (int i = 0; i < sides; i++) {
         float x = cos( radians( i * angle ) ) * r;
@@ -349,7 +338,8 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
         vertex( x, -halfHeight, y );    
     }
     endShape(CLOSE);
-    // pohja
+    
+    // pohja, monikulmio
     beginShape();
     for (int i = 0; i < sides; i++) {
         float x = cos( radians( i * angle ) ) * r;
@@ -358,7 +348,7 @@ void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
     }
     endShape(CLOSE);
     
-    //piirretaan lopuksi sivut
+     // pohjan ja kannen välillä olevat tahkot
 beginShape(TRIANGLE_STRIP);
 for (int i = 0; i < sides + 1; i++) {
     float x = cos( radians( i * angle ) ) * r;
@@ -372,7 +362,6 @@ translate(-x1, -y1, -z1);
 
 
 void drawKupu(float r, float f, int x1, int y1, int z1) {
-
   noStroke();
   fill(200, 30, 49);
   
@@ -380,6 +369,8 @@ void drawKupu(float r, float f, int x1, int y1, int z1) {
   float x, y, z;
   
   translate(x1, y1, z1);
+  
+  // puolipallon piirtäminen kartionsiivu kerrallaan
   for(float phi = 0.0; phi < HALF_PI; phi += f) {
     beginShape(QUAD_STRIP);
     for(float theta = 0.0; theta < TWO_PI + f; theta += f) {
@@ -400,54 +391,4 @@ void drawKupu(float r, float f, int x1, int y1, int z1) {
 
   translate(-x1, -y1, -z1);
 }
- 
-void mousePressed() {
-  for (int i = 10; i < 20; i++) {
-    if (millis() > startTime + 10){
-      if (kor2 < 500) {
-      startTime = millis();
-      kor1 = kor1 + i;
-      kor2 = kor2 + 2*i;
-      kor3 = kor3 + 2*i;
-      kor4 = kor4 + 2*i;
-      kor5 = kor5 + i;
-      }
-    }
-  }
-}
-void drawInstructions(){
-  //fill(255,255,255); //Fade in from black
-  
-  cam.beginHUD();
-  pushMatrix();
-  fill(0);
-  rect(0, 0, width, height);
-  //fill(0);
-  translate(10, 100);
-  //fill(255,255,255);
-  //rect(100,100,600,600);
-  
-  textFont(font);
-  textSize(60);
-  fill(255,255,255);
-  text("Liisa ihmemaassa", 0, 0);
-  fill(255,255,255);
-  textSize(30);
-  text("Hiiri", 0, 40);
-  fill(255,255,255);
-  textSize(20);
-  text("Oikea - zoomaus...", 0, 70);
-  fill(255,255,255);
-  text("Right - siirrä näkymää...", 0, 100);
-  fill(255,255,255);
-  text("Center - Siirry kaksiulotteisesti...", 0, 130);
-  fill(255,255,255);
-  textSize(30);
-  text("Näppäimistö", 0, 160);
-  fill(255,255,255);
-  textSize(20);
-  text("A - Aktivoi törmäystarkastelu...", 0, 190);
-  fill(255,255,255);
-  popMatrix();
-  cam.endHUD();
-}
+
