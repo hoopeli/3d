@@ -19,17 +19,15 @@ int growTime;
 
 PFont font;
 
-//music
+//musiikki
 Minim minim;
 AudioPlayer aplayer;
 
 void setup() {
   size(600, 600, P3D);
 
-  //create and fill the list of boids
+  //luodaan ja täytetään uusi boid-lista
   flock1 = new BoidList(initBoidNum, 255);
-  //flock2 = new BoidList(100,0);
-  //flock3 = new BoidList(100,128);
 
   //peasycam
   cam = new PeasyCam(this, 300, 300, 600, 800);
