@@ -277,7 +277,7 @@ void drawInstructions() {
   textFont(font);
   textSize(60);
   fill(255);
-  text("Liisa ihmemaassa", 0, 0);
+  text("The Godfather ihmemaassa", 0, 0);
   textSize(30);
   text("Hiiri", 0, 40);
   textSize(20);
