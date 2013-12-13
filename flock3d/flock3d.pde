@@ -1,4 +1,3 @@
-
 import peasy.*;
 PeasyCam cam;
 PImage img;
@@ -57,9 +56,10 @@ void draw() {
   
   noFill();
   stroke(0);
-  drawScene();        
+  drawScene();
+  if(startTime < 10000){  
   drawInstructions(); //Title and instructions
-  
+  }
  
   drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
   drawKupu(60.0, 2*PI/20, width/2, width-kor1, 400);
@@ -399,21 +399,30 @@ void mousePressed() {
   }
 }
 void drawInstructions(){
-  fill(0, 355); //Fade in from black
+  //fill(255,255,255); //Fade in from black
   rect(0, 0, width, height);
-  fill(255, 155);
+  fill(255, 255, 255);
   pushMatrix();
-  translate(width/2, height/2-100);
+  translate(100, 100, 1000);
   textFont(font);
-  textSize(120);
+  textSize(60);
   text("Liisa ihmemaassa", 0, 0);
-  textSize(40);
-  text("Hiiri", 0, 100);
-  textSize(40);
-  text("Oikea - zoomaus...", 0, 150);
-  text("Right - siirrä näkymää...", 0, 200);
-  text("Center - Siirry kaksiulotteisesti...", 0, 250);
-  text("Näppäimistö", 0, 100);
+  fill(0);
   textSize(30);
+  text("Hiiri", 0, 40);
+  fill(0);
+  textSize(20);
+  text("Oikea - zoomaus...", 0, 70);
+  fill(0);
+  text("Right - siirrä näkymää...", 0, 100);
+  fill(0);
+  text("Center - Siirry kaksiulotteisesti...", 0, 130);
+  fill(0);
+  textSize(30);
+  text("Näppäimistö", 0, 160);
+  fill(0);
+  textSize(20);
+  text("A - Aktivoi törmäystarkastelu...", 0, 190);
+  fill(0);
   popMatrix();
 }
