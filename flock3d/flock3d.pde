@@ -1,23 +1,28 @@
+//3D flocking implemented from http://www.openprocessing.org/sketch/6910
+
 import peasy.*;
 import ddf.minim.*;
 
 PeasyCam cam;
-PImage img;
 PVector[] sphereVertexPoints;
 
 int initBoidNum = 200; //amount of boids to start the program with
-BoidList flock1; //,flock2,flock3;
+BoidList flock1;
 boolean smoothEdges = false, avoidWalls = false, lighting = true; //some booleans for user settings
 
+//sienien korkeudet
 int kor1 = 150;
 int kor2 = 90;
 int kor3 = 80;
 int kor4 = 80;
 int kor5 = 170;
+
+//ajastukset
 int startTime;
 int growTime;
 
 PFont font;
+PImage img;
 
 //musiikki
 Minim minim;
@@ -63,7 +68,6 @@ void draw() {
     pointLight(120, 52, 100, 400, 250, 700);
   }
 
-
   noFill();
   stroke(0);
   drawScene();
@@ -95,8 +99,6 @@ void draw() {
   drawHat(40.0, 2*PI/20, 100, width-kor5, 770);
 
   flock1.run(avoidWalls);
-  //flock2.run(avoidWalls);
-  //flock3.run(avoidWalls);
 
   /* // antialiasing
   if (smoothEdges){
@@ -107,6 +109,7 @@ void draw() {
   noSmooth();
   }
   */
+  
   println(frameRate); //print the framerate
 }
 
@@ -132,6 +135,7 @@ void keyPressed() {
       if (millis() > growTime + 10) {
         if (kor2 < 500) {
           growTime = millis();
+          
           // lisäys sienien korkeuksiin
           kor1 = kor1 + i;
           kor2 = kor2 + 2*i;

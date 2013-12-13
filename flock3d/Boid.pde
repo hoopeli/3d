@@ -1,4 +1,5 @@
-//Boidit ovat lentäviä objekteja, jotka meidän ohjelmamma tapauksessa ovat pelikortteja
+//Boidit ovat lentäviä objekteja, jotka meidän ohjelmamme tapauksessa ovat pelikortteja
+
 class Boid
 {
   //fields
