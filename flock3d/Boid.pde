@@ -1,13 +1,3 @@
-/*Boid object class
-* Matt Wetmore
-* Changelog
-* ---------
-* 12/14/09: Started work
-* 12/16/09: Revised code to work with forces instead of heading. First steering algorithm implemented
-* 12/18/09: Arrival steering behavior
-* 12/20/09: Alignment added NEED TO FIX COHESION
-* 1/6/10: Finished algorithms. Time to clean up the code!
-*/
 
 class Boid
 {
@@ -51,7 +41,7 @@ class Boid
   void run(ArrayList bl)
   {
     t+=.1;
-    flap = 3*sin(t);
+    flap = 4*sin(t);
     
     //acc.add(new PVector(0,.05,0));
     //acc.add(PVector.mult(avoid(new PVector(mouseX,mouseY,pos.z),true),50));
@@ -82,7 +72,7 @@ class Boid
     sep = seperation(bl);
     acc.add(PVector.mult(ali,1));
     acc.add(PVector.mult(coh,3));
-    acc.add(PVector.mult(sep,1));
+    acc.add(PVector.mult(sep,8));
   }
   
   void scatter()
@@ -278,7 +268,7 @@ class Boid
     popMatrix();
   }
   
-  //steering. If arrival==true, the boid slows to meet the target. Credit to Craig Reynolds
+  //steering. If arrival==true, the boid slows to meet the target
   PVector steer(PVector target,boolean arrival)
   {
     PVector steer = new PVector(); //creates vector for steering
