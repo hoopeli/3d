@@ -407,32 +407,34 @@ void drawInstructions(){
   
   cam.beginHUD();
   pushMatrix();
+  fill(0);
   rect(0, 0, width, height);
-  fill(255, 255, 255);
+  //fill(0);
   translate(10, 100);
-  fill(255,255,255);
+  //fill(255,255,255);
   //rect(100,100,600,600);
   
   textFont(font);
   textSize(60);
+  fill(255,255,255);
   text("Liisa ihmemaassa", 0, 0);
-  fill(0);
+  fill(255,255,255);
   textSize(30);
   text("Hiiri", 0, 40);
-  fill(0);
+  fill(255,255,255);
   textSize(20);
   text("Oikea - zoomaus...", 0, 70);
-  fill(0);
+  fill(255,255,255);
   text("Right - siirrä näkymää...", 0, 100);
-  fill(0);
+  fill(255,255,255);
   text("Center - Siirry kaksiulotteisesti...", 0, 130);
-  fill(0);
+  fill(255,255,255);
   textSize(30);
   text("Näppäimistö", 0, 160);
-  fill(0);
+  fill(255,255,255);
   textSize(20);
   text("A - Aktivoi törmäystarkastelu...", 0, 190);
-  fill(0);
+  fill(255,255,255);
   popMatrix();
   cam.endHUD();
 }
