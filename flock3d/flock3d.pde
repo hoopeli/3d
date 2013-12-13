@@ -406,15 +406,14 @@ void drawInstructions(){
   translate(width/2, height/2-100);
   textFont(font);
   textSize(120);
-  text("The Creator", 0, 0);
+  text("Liisa ihmemaassa", 0, 0);
   textSize(40);
-  text("Mouse", 0, 100);
+  text("Hiiri", 0, 100);
   textSize(40);
-  text("Left - destroy or breed...", 0, 150);
-  text("Right - move sun...", 0, 200);
-  text("Center - no barriers...", 0, 250);
+  text("Oikea - zoomaus...", 0, 150);
+  text("Right - siirrä näkymää...", 0, 200);
+  text("Center - Siirry kaksiulotteisesti...", 0, 250);
+  text("Näppäimistö", 0, 100);
   textSize(30);
-  text("Hold down right - camera rotation", 0, 300);
-  text("Double click - center camera", 0, 350);
   popMatrix();
 }
