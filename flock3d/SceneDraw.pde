@@ -292,7 +292,7 @@ void drawInstructions() {
   text("Q/W - Lisää/poista kortteja...", 0, 250);
   text("E - Sienet kasvaa...", 0, 280);
   textSize(40);
-  text("Paina hiiren vasenta       nappia jatkaaksesi...", 0, 330);
+  text("Paina hiiren vasenta       nappia jatkaaksesi...", 0, 320);
   popMatrix();
   cam.endHUD();
 }
