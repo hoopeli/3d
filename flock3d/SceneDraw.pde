@@ -276,7 +276,7 @@ void drawInstructions() {
   fill(0);
   rect(0, 0, width, height);
   //fill(0);
-  translate(10, 100);
+  translate(10, 50);
   //fill(255,255,255);
   //rect(100,100,600,600);
 
@@ -288,14 +288,14 @@ void drawInstructions() {
   text("Hiiri", 0, 40);
   textSize(20);
   text("Oikea - zoomaus...", 0, 70);
-  text("Right - siirrä näkymää...", 0, 100);
+  text("Vasen - siirrä näkymää...", 0, 100);
   text("Center - Siirry kaksiulotteisesti...", 0, 130);
   textSize(30);
   text("Näppäimistö", 0, 160);
   textSize(20);
-  text("A - Aktivoi törmäystarkastelu...", 0, 190);
-  text("D - Poista valot...", 0, 220);
-  text("Q/W - Lisää/poista kortteja...", 0, 250);
+  text("A - Aktivoi törmäystarkastelu seiniin...", 0, 190);
+  text("Q/W - Lisää/poista kortteja...", 0, 220);
+  text("E - Sienet kasvaa...", 0, 250);
   textSize(40);
   text("Paina hiiren vasenta nappia jatkaaksesi...", 0, 290);
   popMatrix();

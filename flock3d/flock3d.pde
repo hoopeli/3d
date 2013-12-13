@@ -116,13 +116,10 @@ void draw() {
 //handle keys
 void keyPressed() {
   switch (key) {
-  case 's': 
-    smoothEdges = !smoothEdges; 
-    break;
   case 'a': 
     avoidWalls = !avoidWalls; 
     break;
-  case 'd': 
+  case 's': 
     lighting = !lighting; 
     break;
   case 'q': 
