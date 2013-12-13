@@ -8,6 +8,12 @@ int initBoidNum = 200; //amount of boids to start the program with
 BoidList flock1; //,flock2,flock3;
 boolean smoothEdges = false, avoidWalls = false, lighting = true; //some booleans for user settings
 
+int kor1 = 150;
+int kor2 = 90;
+int kor3 = 80;
+int kor4 = 80;
+int kor5 = 170;
+int startTime;
 
 void setup() {
   size(600, 600, P3D);
@@ -22,6 +28,8 @@ void setup() {
   cam.setMaximumDistance(4000);
   
   img = loadImage("katti2.jpg");
+  
+  startTime = millis();
 }
 
 void draw() {  
@@ -31,15 +39,15 @@ void draw() {
   if (lighting) {
     //valon suunta ylös, taakse, vasemmalle
     // valon sijainti oikealla, alhaalla, lähellä
-    spotLight(200, 102, 126, 500, 400, 800, -1, -1, -1, PI/2, 2);
+    spotLight(200, 102, 166, 500, 400, 800, -1, -1, -1, PI/2, 2);
     spotLight(240, 52, 50, 100, 400, 400, 1, -1, 1, PI/2, 2);
     
     //valo joulupalloista
-    /**
-    pointLight(240, 52, 50, 300, 200, 600);
-    pointLight(200, 52, 150, 200, 300, 500);
-    pointLight(150, 52, 50, 400, 250, 700);
-    */
+    
+    //pointLight(240, 52, 50, 300, 200, 600);
+   // pointLight(200, 52, 150, 200, 300, 500);
+    pointLight(120, 52, 100, 400, 250, 700);
+    
   }
   
   
@@ -47,21 +55,21 @@ void draw() {
   stroke(0);
   drawScene();
   
-  //65 on puolet korkeudesta 130
-  drawCylinder(10, 20, 150, width/2, width-75, 400);
-  drawKupu(60.0, 2*PI/20, width/2, width-105, 400);
  
-  drawCylinder(10, 30, 90, 430, width-45, 500);
-  drawKupu(55.0, 2*PI/20, 430, width-75, 500);
+  drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
+  drawKupu(60.0, 2*PI/20, width/2, width-kor1, 400);
+ 
+  drawCylinder(10, 30, kor2, 430, width-(kor2/2), 500);
+  drawKupu(55.0, 2*PI/20, 430, width-kor2, 500);
   
-  drawCylinder(10, 10, 80, 500, width-40, 800);
-  drawKupu(32.0, 2*PI/20, 500, width-70, 800);
+  drawCylinder(10, 10, kor3, 500, width-(kor3/2), 800);
+  drawKupu(32.0, 2*PI/20, 500, width-kor3, 800);
   
-  drawCylinder(10, 15, 80, 100, width-40, 350);
-  drawKupu(25.0, 2*PI/20, 100, width-70, 350);
+  drawCylinder(10, 15, kor4, 100, width-(kor4/2), 350);
+  drawKupu(25.0, 2*PI/20, 100, width-kor4, 350);
   
-  drawCylinder(10, 15, 170, 100, width-85, 770);
-  drawKupu(40.0, 2*PI/20, 100, width-140, 770);
+  drawCylinder(10, 15, kor5, 100, width-(kor5/2), 770);
+  drawKupu(40.0, 2*PI/20, 100, width-kor5, 770);
   
   flock1.run(avoidWalls);
   //flock2.run(avoidWalls);
@@ -220,14 +228,14 @@ void drawScene() {
  // ja samalla 11 --> 21
  for(int x = 1; x < 600; x += 20) {
     for(int z = 300; z < 899; z += 20) {
-      stroke(50, 240, 20);
+      stroke(80, 210, 20);
       line(x, 600, z, x, 555, z);
     }
   }
   
   for(int x = 11; x < 600; x += 20) {
     for(int z = 310; z < 899; z += 20) {
-      stroke(50, 240, 20);
+      stroke(80, 210, 20);
       line(x, 600, z, x, 555, z);
     }
   }
@@ -307,7 +315,6 @@ void drawScene() {
 
 void drawCylinder(int sides, float r, float h, int x1, int y1, int z1)
 {
-  
     float angle = 360 / sides;
     float halfHeight = h / 2;
     // kansi
@@ -372,4 +379,17 @@ void drawKupu(float r, float f, int x1, int y1, int z1) {
   translate(-x1, -y1, -z1);
 }
  
-
+void mousePressed() {
+  for (int i = 10; i < 20; i++) {
+    if (millis() > startTime + 10){
+      if (kor2 < 500) {
+      startTime = millis();
+      kor1 = kor1 + i;
+      kor2 = kor2 + 2*i;
+      kor3 = kor3 + 2*i;
+      kor4 = kor4 + 2*i;
+      kor5 = kor5 + i;
+      }
+    }
+  }
+}
