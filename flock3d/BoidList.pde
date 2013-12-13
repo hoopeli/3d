@@ -1,9 +1,3 @@
-/*BoidList object class
-* Matt Wetmore
-* Changelog
-* ---------
-* 12/18/09: Started work
-*/
 
 class BoidList
 {

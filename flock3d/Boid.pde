@@ -10,7 +10,7 @@ class Boid
   float sc=9; //scale factor for the render of the boid
   float flap = 0;
   float t=0;
-  int kuvio = 0;
+  int card = 0; //card's suit
   boolean avoidWalls = false;
   
   //constructors
@@ -22,8 +22,8 @@ class Boid
     acc = new PVector(0,0,0);
     neighborhoodRadius = 100;
     
-    // arvotaan kortin kuvio
-    kuvio = int(random(4));
+    //randomize the suit of the card
+    card = int(random(4));
   }
   Boid(PVector inPos,PVector inVel,float r)
   {
@@ -34,8 +34,8 @@ class Boid
     acc = new PVector(0,0);
     neighborhoodRadius = r;
     
-    // arvotaan kortin kuvio
-    kuvio = int(random(4));
+    //randomize the suit of the card
+    card = int(random(4));
   }
   
   void run(ArrayList bl)
@@ -43,8 +43,6 @@ class Boid
     t+=.1;
     flap = 4*sin(t);
     
-    //acc.add(new PVector(0,.05,0));
-    //acc.add(PVector.mult(avoid(new PVector(mouseX,mouseY,pos.z),true),50));
     if(avoidWalls)
     {
       acc.add(PVector.mult(avoid(new PVector(pos.x,height,pos.z),true),5));
@@ -111,7 +109,7 @@ class Boid
     noStroke();
     fill(h);
     
-    //kortin piirto
+    //draw cards
     beginShape(QUADS);
     vertex(0,0,-2*sc);
     vertex(-3*sc,0,-2*sc);
@@ -139,13 +137,11 @@ class Boid
     
     endShape();
     
-    //tausta
-    
-    //kuviot
+    //suits
     fill(255,0,0);
     
-    //ruutu
-    if (kuvio == 0) {
+    //diamonds
+    if (card == 0) {
       beginShape(QUADS);
       vertex(-1.5*sc,0.01,0);
       vertex(0,0.01,-1*sc);
@@ -154,8 +150,8 @@ class Boid
       endShape();
     }
     
-    //hertta
-    if (kuvio == 1) {
+    //hearts
+    if (card == 1) {
       beginShape(TRIANGLES);
       vertex(0.5*sc,0.01,-1*sc);
       vertex(0.5*sc,0.01,1*sc);
@@ -179,8 +175,8 @@ class Boid
     
     fill(0);
     
-    //risti
-    if (kuvio == 2) {
+    //clubs
+    if (card == 2) {
       beginShape(TRIANGLES);
       vertex(-0.5*sc,0.01,0);
       vertex(-1.5*sc,0.01,-0.3*sc);
@@ -191,7 +187,7 @@ class Boid
       vertex(-0.5*sc,0.01,1*sc);
       endShape();
       
-      //vasen sakara
+      //left
       beginShape();
       curveVertex(3*sc,0.01,0);
       curveVertex(-0.5*sc,0.01,0);
@@ -206,7 +202,7 @@ class Boid
       curveVertex(-0.5*sc,0.01,1*sc);
       endShape();
       
-      //keskisakara
+      //middle
       beginShape();
       curveVertex(-0.5*sc,0.01,1*sc);
       curveVertex(0.5*sc,0.01,-0.5*sc);
@@ -221,7 +217,7 @@ class Boid
       curveVertex(-0.5*sc,0.01,-1*sc);
       endShape();
       
-      //oikea sakara
+      //right
       beginShape();
       curveVertex(-0.5*sc,0.01,-1*sc);
       curveVertex(0.5*sc,0.01,0.5*sc);
@@ -237,8 +233,8 @@ class Boid
       endShape();
     }
     
-    //pata
-    if (kuvio == 3) {
+    //spades
+    if (card == 3) {
       beginShape(TRIANGLES);
       vertex(-0.5*sc,0.01,0);
       vertex(-1.5*sc,0.01,-0.3*sc);
@@ -264,7 +260,6 @@ class Boid
       endShape();
     }
     
-    //box(10);
     popMatrix();
   }
   
@@ -296,7 +291,6 @@ class Boid
     steer.set(PVector.sub(pos,target)); //steering vector points away from target
     if(weight)
       steer.mult(1/sq(PVector.dist(pos,target)));
-    //steer.limit(maxSteerForce); //limits the steering force to maxSteerForce
     return steer;
   }
   
