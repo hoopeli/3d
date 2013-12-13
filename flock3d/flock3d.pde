@@ -57,8 +57,12 @@ void draw() {
   noFill();
   stroke(0);
   drawScene();
-  if(startTime < 10000){  
+  if(startTime < 10000){
+  lighting = false;  
   drawInstructions(); //Title and instructions
+  }
+  if(startTime > 10000){
+  lighting = true; 
   }
  
   drawCylinder(10, 20, kor1, width/2, width-(kor1/2), 400);
@@ -400,10 +404,11 @@ void mousePressed() {
 }
 void drawInstructions(){
   //fill(255,255,255); //Fade in from black
-  //rect(0, 0, width, height);
-  //fill(255, 255, 255);
+  
   cam.beginHUD();
   pushMatrix();
+  rect(0, 0, width, height);
+  fill(255, 255, 255);
   translate(10, 100);
   fill(255,255,255);
   //rect(100,100,600,600);
